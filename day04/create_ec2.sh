@@ -60,7 +60,7 @@ create_ec2_instance() {
 
     if [[ -z "$instance_id" ]]; then
         echo "Failed to create EC2 instance." >&2
-        exit 1
+        return 1
     fi
 
     echo "Instance $instance_id created successfully."
@@ -70,8 +70,10 @@ create_ec2_instance() {
 }
 
 main() {
-    check_awscli || install_awscli
-
+    if ! check_awscli ; then
+      install awscli || exit 1
+      fi
+ 
     echo "Creating EC2 instance..."
 
     # Specify the parameters for creating the EC2 instance
