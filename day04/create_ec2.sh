@@ -4,7 +4,7 @@ set -euo pipefail
 check_awscli() {
     if ! command -v aws &> /dev/null; then
         echo "AWS CLI is not installed. Please install it first." >&2
-        exit 1
+        return  1
     fi
 }
 
@@ -60,7 +60,7 @@ create_ec2_instance() {
 
     if [[ -z "$instance_id" ]]; then
         echo "Failed to create EC2 instance." >&2
-        return 1
+        exit 1
     fi
 
     echo "Instance $instance_id created successfully."
