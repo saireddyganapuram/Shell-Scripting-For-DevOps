@@ -71,7 +71,7 @@ create_ec2_instance() {
 
 main() {
     if ! check_awscli ; then
-      install awscli || exit 1
+      install_awscli || exit 1
       fi
  
     echo "Creating EC2 instance..."
